@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Canvas Example</title>
+    <style>
+       canvas {
+         border: 1px solid black;
+       }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="200">
+    <script>
+      const canvas = document.getElementById("myCanvas"); //get the HTML canvas element 
+      const ctx = canvas.getContext("2d"); //get the 2d rendering context 
+      ctx.fillStyle = "green"; //set the fill style property of the drawing context
+      ctx.fillRect(20, 10, 250, 100); //draw one fill and fill the rectangle
+     </script>
+        
+    </canvas>
+  </body>
+
+</html>
+
+
+2. <body>
+ <canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d"); 
+      ctx.fillStyle = "green";
+      ctx.beginPath(); //Start a new path
+      ctx.arc(85, 50, 40, 0, Math.PI * 2); //Draw a circle at (85, 50) with radius 40
+      ctx.fill();  //Fill the circle with the current fill colour
+     
+     </script>
+
+NEON CIRCLE INSIDE
+
+3. <script>
+  const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d"); 
+     
+      //Create linear gradient
+       const gradient = ctx.createLinearGradient(
+        0,
+        0,
+       canvas.width,
+       canvas.height
+
+       );
+
+     gradient.addColorStop(0, "blue");  // Add color stop at the beginning (0%) 
+     gradient.addColorStop(1, "red"); // Add color stop at the end (100%)
+
+     // Fill rectangle with gradient
+     ctx.fillStyle = gradient;
+     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+4. ORANGE CIRCLES TO CREATE
+<canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d"); 
+     
+      canvas.addEventListener("click", function (event) {
+        const x = event.clientX - canvas.offsetLeft;
+        const y = event.clientY - canvas.offsetTop;
+
+        // Draw a circle where the user clicked
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, 2 * Math.PI);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+      });
+      </script>
+        
+5. TO DRAW LINES
+ 
+
+
+<canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      let isDrawing = false;
+
+      canvas.addEventListener("mousedown", function (event) {
+      isDrawing = true;
+      draw(
+        event.clientX - canvas.offsetLeft,
+        event.clientY - canvas.offsetTop
+      );
+
+      });
+
+      canvas.addEventListener("mousemove", function (event) {
+        if (isDrawing) {
+           draw(
+             event.clientX - canvas.offsetLeft,
+             event.clientY - canvas.offsetTop
+       
+        );
+      }
+
+      });
+
+      canvas.addEventListener("mouseup", function () {
+        isDrawing =false;
+      });
+
+      function draw(x,y) {
+        ctx.fillStyle = "green";
+        ctx.fillRect(x, y, 1, 5);
+
+      };
+6.
+
+  <body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+     
+      //Create a new image object
+      const img = new Image ();
+
+      // Set yje source  of the image 
+      img.src = "gaia-goddess.jpg";
+
+      // When the image is loaded, draw it onto the canvas
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      };
+
+      // Add click event listener to spin the image
+      canvas.addEventListener("click", function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const angle = 0;
+        rotateImage(img, angle);
+      });
+
+      // Function to rotate the image
+      function rotateImage(image, angle) {
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate((angle * Math.PI) / 180);
+        ctx.drawImage(
+          image,
+          -canvas.width / 2,
+          -canvas.height / 2,
+           canvas.width, 
+           canvas.height
+
+        );
+        ctx.restore();
+
+        //Increment angle for next rotation
+        const newAngle = angle + 10;
+        if (newAngle < 360) {
+           setTimeout(function () {
+            rotateImage(image,  newAngle);
+
+        }, 100);
+        }
+      }
+      </script>
+        
+  </body>
+    
